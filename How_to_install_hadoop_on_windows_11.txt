@@ -1,0 +1,71 @@
+How to install hadoop on windows 11
+I) condition: install jdk and jre 8u202 (very important)
+install hadoop 3.2.4
+II) set environment variable:
+1) JAVA_HOME
+path: file jdk
+2) edit path system variable:
+C:\Java\jdk\bin
+III) Change file text:
+1) hadoop-env
+set JAVA_HOME=C:\Java\jdk
+2) core-site.xml
+<configuration>
+	<property>
+		<name>fs.defaultFS</name>
+		<value>hdfs://localhost:9000</value>
+	</property>
+</configuration>
+3) hdfs-site.xml
+<configuration>
+	<property>
+		<name>dfs.replication</name>
+		<value>1</value>
+	</property>
+	
+	<property>
+		<name>dfs.namenode.name.dir</name>
+		<value>C:\hadoop\data\namenode</value>
+	</property>
+	
+	<property>
+		<name>dfs.datanode.name.dir</name>
+		<value>C:\hadoop\data\datanode</value>
+	</property>
+</configuration>
+4) create data folder in hadoop folder(file name is: data)
+inside the file data will have 2 folder:
++namenode
++datanode
+5) mapred-site.xml
+<configuration>
+	<property>
+		<name>mapreduce.framework.name</name>
+		<value>yarn</value>
+	</property>
+</configuration>
+6) yarn
+<configuration>
+
+<!-- Site specific YARN configuration properties -->
+
+	<property>
+		<name>yarn.nodemanager.aux-services</name>
+		<value>mapreduce_shuffle</value>
+	</property>
+
+
+	<property>
+		<name>yarn.nodemanager.auxservices.mapreduce.shuffle.class</name>
+		<value>org.apache.hadoop.mapred.shuffleHandler</value>
+	</property>
+</configuration>
+7) download bin folder on google driver
+https://drive.google.com/drive/folders/1iURNbow2IglhAhSy3sfY5xxVfAg33NBW
+7.1) delete bin folder inside hadoop folder and paste the downloaded bin folder
+8) set environment variable for hadoop
+8.1) 	HADOOP_HOME
+	C:\hadoop\bin
+8.2) edit path system variable:
+C:\hadoop\bin
+C:\hadoop\sbin
